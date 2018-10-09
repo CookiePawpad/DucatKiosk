@@ -118,7 +118,7 @@ Loop {
 							msg := msg "Ducats Per Plat WA: " ducatsjson.payload.previous_day[A_Index].ducats_per_platinum_wa "`n"
 							if(showaverageplat)
 							msg := msg "Average Plat: " ducatsjson.payload.previous_day[A_Index].median "`n"
-							if(showaverageplat)
+							if(showaverageplatwa)
 							msg := msg "Average Plat WA: " ducatsjson.payload.previous_day[A_Index].wa_price "`n"
 							break
 						}
@@ -137,7 +137,7 @@ Loop {
 							msg := msg "Ducats Per Plat WA: " ducatsjson.payload.previous_hour[A_Index].ducats_per_platinum_wa "`n"
 							if(showaverageplat)
 							msg := msg "Average Plat: " ducatsjson.payload.previous_hour[A_Index].median "`n"
-							if(showaverageplat)
+							if(showaverageplatwa)
 							msg := msg "Average Plat WA: " ducatsjson.payload.previous_hour[A_Index].wa_price "`n"
 							break
 						}
