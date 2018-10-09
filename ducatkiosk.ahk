@@ -78,7 +78,7 @@ else {
 
 Vaulted := ["Ash Prime","Ember Prime","Frost Prime","Loki Prime","Mag Prime","Nekros Prime","Nova Prime","Nyx Prime","Rhino Prime","Saryn Prime","Trinity Prime","Valkyr Prime","Vauban Prime","Volt Prime","Akstiletto Prime","Ankyros Prime","Bo Prime","Boar Prime","Boltor Prime","Cernos Prime","Dakra Prime","Dual Kamas Prime","Fragor Prime","Galatine Prime","Glaive Prime","Hikou Prime","Latron Prime","Nikana Prime","Reaper Prime","Scindo Prime","Sicarus Prime","Soma Prime","Spira Prime","Tigris Prime","Vasto Prime","Vectis Prime","Venka Prime","Carrier Prime","Odonata Prime","Kavasa Prime"]
 theme := 1
-~9::
+~+z::
 DllCall("QueryPerformanceCounter", "Int64*", CounterBefore)
 msg := ""
 themecheck := 1
