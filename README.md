@@ -11,7 +11,7 @@ Options: Left or Right click tray icon
   
 **Usage**  
 Run ducatkiosk.ahk  
-Go to the ducat kiosk in-game if you havent already  
+Open inventory or go to a ducat kiosk in-game
 Ducat kiosks are found at relays  
 Mouse over item you want to check  
 Press Shift+Z  
