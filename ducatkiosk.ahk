@@ -145,12 +145,15 @@ Loop {
 				}
 				break
 			}
-			else if(A_Index = itemsjson.payload.items.en.length() & !estimation) {
-				estimation := 1
-				GoTo, SearchLoop
-				break
+			else if(A_Index = itemsjson.payload.items.en.length()) {
+				if(!estimation) {
+					estimation := 1
+					GoTo, SearchLoop
+				}
+				else {
+					break
+				}
 			}
-			break
 		}
 		
 		vaultext := "Vaulted: No`n"
