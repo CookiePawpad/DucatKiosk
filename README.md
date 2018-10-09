@@ -18,7 +18,16 @@ Ducat kiosks are found at relays
 Mouse over item you want to check  
 Press Shift+Z  
 Result box stays open for 12 seconds and will close if you left click or start another search  
-  
+
+**Vaulted Items**  
+config.ini contains a list of vaulted items  
+The list will be kept up to date so the latest version should reflect whats currently vaulted or  
+you can change this list yourself, just reload script after doing so  
+Vaulted items are seperated by enter key example below  
+Lotus Prime  
+Kavat Prime  
+Clem Prime  
+
 **Options**  
 Options is accessed by tray icon  
 Checkmarked equals enabled while no checkmark equals disabled  
