@@ -1,5 +1,6 @@
 **Requirements**  
 Requires AHK https://autohotkey.com/  
+The script and its files https://github.com/CookiePawpad/DucatKiosk/releases  
 Internet  
 Warframe  
   
