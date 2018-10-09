@@ -33,6 +33,7 @@ Checkmarked equals enabled while no checkmark equals disabled
 **Exit:** Exits the script  
   
 **Errors occur if**  
-The API cannot be reached, usually results in an error code  
+The API cannot be reached, usually results in an error number code  
 A file is missing or cannot be accessed, one or more files cannot be read/written or do not exist  
-You thought saving your kavats/kubrows shed fur in config.ini would be a good idea
+You thought saving your kavats/kubrows shed fur in config.ini would be a good idea  
+The script will usually exit if an error occurs
