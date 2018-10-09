@@ -34,6 +34,8 @@ IniRead, showaverageplat, config.ini, TrayMenu, showaverageplat
 IniRead, showaverageplatwa, config.ini, TrayMenu, showaverageplatwa
 IniRead, showducats, config.ini, TrayMenu, showducats
 IniRead, tasktime, config.ini, TrayMenu, tasktime
+IniRead, vaulted, config.ini, Vaulted
+vaulted := StrSplit(vaulted, "`n")
 
 if(showitemname)
 Menu,Tray,Togglecheck, Item Name
@@ -69,14 +71,13 @@ else {
 
 apirequest.Open("GET","https://api.warframe.market/v1/tools/ducats")
 apirequest.Send()
-if(apirequest.status = 200)
+if(apirequest.status == 200)
 ducatsjson := JSON.Load(apirequest.ResponseText)
 else {
 	MsgBox % "Error: " apirequest.status "`nScript will now exit"
 	ExitApp
 }
 
-Vaulted := ["Ash Prime","Ember Prime","Frost Prime","Loki Prime","Mag Prime","Nekros Prime","Nova Prime","Nyx Prime","Rhino Prime","Saryn Prime","Trinity Prime","Valkyr Prime","Vauban Prime","Volt Prime","Akstiletto Prime","Ankyros Prime","Bo Prime","Boar Prime","Boltor Prime","Cernos Prime","Dakra Prime","Dual Kamas Prime","Fragor Prime","Galatine Prime","Glaive Prime","Hikou Prime","Latron Prime","Nikana Prime","Reaper Prime","Scindo Prime","Sicarus Prime","Soma Prime","Spira Prime","Tigris Prime","Vasto Prime","Vectis Prime","Venka Prime","Carrier Prime","Odonata Prime","Kavasa Prime"]
 theme := 1
 ~+z::
 DllCall("QueryPerformanceCounter", "Int64*", CounterBefore)
@@ -85,7 +86,7 @@ themecheck := 1
 ToolTip
 Loop {
 	ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, %theme%.png
-	if (ErrorLevel = 0) {
+	if (ErrorLevel == 0) {
 		PixelGetColor, color, FoundX, FoundY
 		PixelGetColor, color2, FoundX+210, FoundY+65
 		if(color == color2) {
@@ -101,7 +102,7 @@ Loop {
 		
 		SearchLoop:
 		loop % itemsjson.payload.items.en.length() {
-			if(InStr(itemsjson.payload.items.en[A_Index].item_name,item) | InStr(item,itemsjson.payload.items.en[A_Index].item_name) & estimation) {
+			if(InStr(itemsjson.payload.items.en[A_Index].item_name,item) OR InStr(item,itemsjson.payload.items.en[A_Index].item_name) AND estimation) {
 				itemid := itemsjson.payload.items.en[A_Index].id
 				if(showitemname)
 				msg := msg itemsjson.payload.items.en[A_Index].item_name "`n"
@@ -145,8 +146,8 @@ Loop {
 				}
 				break
 			}
-			else if(A_Index = itemsjson.payload.items.en.length()) {
-				if(!estimation) {
+			else if(A_Index == itemsjson.payload.items.en.length()) {
+				if(!estimation) { 
 					estimation := 1
 					GoTo, SearchLoop
 				}
@@ -155,19 +156,22 @@ Loop {
 				}
 			}
 		}
-		
-		vaultext := "Vaulted: No`n"
-		loop % vaulted.length() {
+		Loop % vaulted.length()
+		{
 			if InStr(item, vaulted[A_Index]) {
 				vaultext := "Vaulted: Yes`n"
 				break
 			}
+			else { 
+				vaultext := "Vaulted: No`n"
+			}
 		}
-		if(showvaulted)
-		msg := msg vaultext
+		if(showvaulted) {
+			msg := msg vaultext
+		}
 		break
 	}
-	else if (ErrorLevel = 1) {
+	else if (ErrorLevel == 1) {
 		if(themecheck) {
 			;msg := msg "Theme change detected!`n"
 			themecheck := 0
@@ -181,7 +185,7 @@ Loop {
 			break
 		}
 	}
-	else if (ErrorLevel = 2) {
+	else if (ErrorLevel == 2) {
 		msg := "Could not start the search`n"
 		break
 	}
