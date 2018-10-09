@@ -184,6 +184,7 @@ Loop {
 }
 DllCall("QueryPerformanceCounter", "Int64*", CounterAfter)
 DllCall("QueryPerformanceFrequency", "Int64*", Frequency)
+if(tasktime)
 msg := msg "Task completed in " Ceil((CounterAfter - CounterBefore)*1000/Frequency) " ms"
 MouseGetPos, xpos, ypos
 ToolTip % msg, xpos+25, ypos
@@ -193,6 +194,7 @@ return
 
 End:
 ToolTip
+active := 0
 SetTimer End, Off
 return
 
