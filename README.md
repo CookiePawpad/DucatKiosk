@@ -19,6 +19,10 @@ Mouse over item you want to check
 Press Shift+Z  
 Result box stays open for 12 seconds and will close if you left click or start another search  
 
+**Limitations**  
+Can only be used with windowed or fullscreen windowed mode 
+
+
 **Vaulted Items**  
 config.ini contains a list of vaulted items  
 The list will be kept up to date so the latest version should reflect whats currently vaulted or  
