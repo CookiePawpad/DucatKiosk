@@ -4,6 +4,8 @@
 #include <JSON>
 SetBatchLines -1
 ListLines Off
+CoordMode, ToolTip, Screen
+CoordMode, Pixel, Screen
 
 #Persistent
 Menu, Tray, Icon, ducat.ico
@@ -21,7 +23,7 @@ Menu, Tray, Add
 Menu, Tray, Add, Task Time, tasktime
 Menu, Tray, Add, Reload, Reload
 Menu, Tray, Add, Exit, Exit
-Menu, Tray, Tip, Ducat Kiosker
+Menu, Tray, Tip, Ducat Kiosk v1.1.0
 Menu, Tray, Click, 1
 
 IniRead, showitemname, config.ini, TrayMenu, showitemname
@@ -85,15 +87,32 @@ msg := ""
 themecheck := 1
 ToolTip
 Loop {
-	ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, %theme%.png
+	WinGetPos, focusX, focusY, ClientWidth, ClientHeight, A
+	ImageSearch, FoundX, FoundY, focusX, focusY, focusX+ClientWidth, focusY+ClientHeight, lib/%theme%.png
 	if (ErrorLevel == 0) {
 		PixelGetColor, color, FoundX, FoundY
-		PixelGetColor, color2, FoundX+210, FoundY+65
+		BoundX := FoundX
+		loop {
+			if(BoundX < (focusX+ClientWidth))
+			{
+				PixelGetColor, colorbound, BoundX, FoundY
+				BoundX += 5
+				if(color != colorbound) {
+					xoffset := BoundX - FoundX - 5
+					break
+				}
+			}
+			else {
+				break
+			}
+
+		}
+		PixelGetColor, color2, FoundX+(xoffset*0.5), FoundY+Ceil(xoffset/9)
 		if(color == color2) {
-			item := StrReplace(OCR([FoundX, FoundY, 420, 68]), "`r`n", " ")
+			item := StrReplace(OCR([FoundX, FoundY, xoffset ,Ceil(xoffset/6.33)]), "`r`n", " ")
 		}
 		else {
-			item := OCR([FoundX, FoundY, 420, 34])
+			item := OCR([FoundX, FoundY, xoffset, Ceil(xoffset/9.33)])
 		}
 		
 		if(!InStr(item,"PRIME BLUEPRINT")){
@@ -152,6 +171,7 @@ Loop {
 					GoTo, SearchLoop
 				}
 				else {
+					msg := msg item " not found in API`n"
 					break
 				}
 			}
@@ -173,7 +193,7 @@ Loop {
 	}
 	else if (ErrorLevel == 1) {
 		if(themecheck) {
-			;msg := msg "Theme change detected!`n"
+			;msg := msg "Theme change detected`n"
 			themecheck := 0
 			theme := 1
 		}
@@ -181,7 +201,7 @@ Loop {
 			theme++
 		}
 		else {
-			msg := "Could not find text`n"
+			msg := "Could not find text to read`n"
 			break
 		}
 	}
@@ -194,8 +214,7 @@ DllCall("QueryPerformanceCounter", "Int64*", CounterAfter)
 DllCall("QueryPerformanceFrequency", "Int64*", Frequency)
 if(tasktime)
 msg := msg "Task completed in " Ceil((CounterAfter - CounterBefore)*1000/Frequency) " ms"
-MouseGetPos, xpos, ypos
-ToolTip % msg, xpos+25, ypos
+ToolTip % msg
 active := 1
 SetTimer End, 12000
 return
