@@ -23,7 +23,7 @@ Menu, Tray, Add
 Menu, Tray, Add, Task Time, tasktime
 Menu, Tray, Add, Reload, Reload
 Menu, Tray, Add, Exit, Exit
-Menu, Tray, Tip, Ducat Kiosk v1.1.0
+Menu, Tray, Tip, Ducat Kiosk v1.1.1
 Menu, Tray, Click, 1
 
 IniRead, showitemname, config.ini, TrayMenu, showitemname
