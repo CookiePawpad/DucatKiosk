@@ -23,7 +23,7 @@ Menu, Tray, Add
 Menu, Tray, Add, Task Time, tasktime
 Menu, Tray, Add, Reload, Reload
 Menu, Tray, Add, Exit, Exit
-Menu, Tray, Tip, Ducat Kiosk v1.1.1
+Menu, Tray, Tip, Ducat Kiosk v1.1.2
 Menu, Tray, Click, 1
 
 IniRead, showitemname, config.ini, TrayMenu, showitemname
@@ -120,6 +120,8 @@ Loop {
 			item := OCR([FoundX, FoundY, xoffset, Ceil(xoffset/9.33)])
 		}
 		
+		;msg := "Theme #: " theme "`nIdentified Text: " item "`n"
+		
 		if(!InStr(item,"PRIME BLUEPRINT")){
 			StringReplace, item, item, %A_Space%BLUEPRINT,
 		}
@@ -177,11 +179,12 @@ Loop {
 				}
 				else {
 					msg := msg item " not found in API`n"
+					itemid := ""
 					break
 				}
 			}
 		}
-		if(showvaulted) {
+		if(showvaulted && itemid) {
 			Loop % vaulted.length()
 			{
 				if InStr(item, vaulted[A_Index]) {
@@ -202,7 +205,7 @@ Loop {
 			themecheck := 0
 			theme := 1
 		}
-		else if(theme != 10) {
+		else if(theme != 11) {
 			theme++
 		}
 		else {
