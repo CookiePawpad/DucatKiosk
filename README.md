@@ -13,14 +13,14 @@ Options: Left or Right click tray icon
   
 **Usage**  
 Run ducatkiosk.ahk  
-Open inventory or go to a ducat kiosk in-game
+Open inventory in prime part tab or go to a ducat kiosk in-game
 Ducat kiosks are found at relays  
 Mouse over item you want to check  
 Press Shift+Z  
 Result box stays open for 12 seconds and will close if you left click or start another search  
 
 **Limitations**  
-Can only be used with windowed or fullscreen windowed mode 
+Can only be used with windowed or fullscreen windowed mode. 
 
 
 **Vaulted Items**  
