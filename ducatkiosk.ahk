@@ -86,6 +86,7 @@ if(tasktime) {
 	DllCall("QueryPerformanceCounter", "Int64*", CounterBefore)
 }
 msg := ""
+estimation := 0
 themecheck := 1
 active := 0
 ToolTip
@@ -120,7 +121,7 @@ Loop {
 			item := OCR([FoundX, FoundY, xoffset, Ceil(xoffset/9.33)])
 		}
 		
-		;msg := "Theme #: " theme "`nIdentified Text: " item "`n"
+		;msg := msg "Theme #: " theme "`nIdentified Text: " item "`n"
 		
 		if(!InStr(item,"PRIME BLUEPRINT")){
 			StringReplace, item, item, %A_Space%BLUEPRINT,
@@ -128,7 +129,7 @@ Loop {
 		
 		SearchLoop:
 		loop % itemsjson.payload.items.en.length() {
-			if(InStr(itemsjson.payload.items.en[A_Index].item_name,item) OR InStr(item,itemsjson.payload.items.en[A_Index].item_name) AND estimation) {
+			if(InStr(itemsjson.payload.items.en[A_Index].item_name,item) OR (InStr(item,itemsjson.payload.items.en[A_Index].item_name) AND estimation) AND InStr(itemsjson.payload.items.en[A_Index].item_name, "PRIME")) {
 				itemid := itemsjson.payload.items.en[A_Index].id
 				if(showitemname)
 				msg := msg itemsjson.payload.items.en[A_Index].item_name "`n"
